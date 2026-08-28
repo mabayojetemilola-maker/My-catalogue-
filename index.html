@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
+<meta name="theme-color" content="#0A0A0A"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="description" content="Hassan Visuals — Creative Designs. Powerful Digital Presence."/>
+<title>Hassan Visuals</title>
+<link rel="manifest" href="manifest.json"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230A0A0A' width='100' height='100'/><text x='50' y='68' font-size='48' text-anchor='middle' fill='%23D4AF37' font-family='sans-serif' font-weight='bold'>HV</text></svg>"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0A0A0A;--card:#1A1A1A;--elev:#222;--gold:#D4AF37;--gold-l:#E8C872;
+  --cyan:#00D4FF;--white:#fff;--w90:rgba(255,255,255,.9);--w70:rgba(255,255,255,.7);
+  --w50:rgba(255,255,255,.5);--w30:rgba(255,255,255,.3);--w12:rgba(255,255,255,.12);
+  --wa:#25D366;--safe-b:env(safe-area-inset-bottom,0px);
+}
+html,body{height:100%;background:var(--bg);color:var(--white);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;overflow:hidden}
+#bg{position:fixed;inset:0;z-index:0;background:var(--bg)}
+#app{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;max-width:480px;margin:0 auto}
+.screens{flex:1;overflow:hidden;position:relative}
+.screen{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:20px 18px calc(88px + var(--safe-b));opacity:0;pointer-events:none;transform:translateX(12px);transition:opacity .28s ease,transform .28s ease}
+.screen.active{opacity:1;pointer-events:auto;transform:translateX(0)}
+.hero-title{font-size:1.85rem;font-weight:800;letter-spacing:.12em;text-align:center;margin-top:28px}
+.hero-sub{color:var(--gold);text-align:center;font-weight:600;margin-top:12px;font-size:1.05rem}
+.hero-desc{color:var(--w70);text-align:center;margin-top:16px;line-height:1.55;font-size:.95rem}
+.btn-row{margin-top:32px;display:flex;flex-direction:column;gap:12px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:15px 20px;border-radius:12px;font-weight:600;font-size:.9rem;letter-spacing:.04em;border:none;cursor:pointer;transition:transform .12s,opacity .15s;text-decoration:none;color:inherit}
+.btn:active{transform:scale(.97)}
+.btn-fill{background:linear-gradient(90deg,var(--gold),var(--gold-l));color:#0A0A0A}
+.btn-outline{background:transparent;border:1px solid rgba(212,175,55,.7);color:var(--gold)}
+.section-title{font-size:1.6rem;font-weight:700;margin-bottom:4px}
+.section-sub{color:var(--w70);font-size:.9rem;margin-bottom:8px}
+.accent-line{width:48px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--cyan));margin-bottom:16px}
+.card{background:rgba(26,26,26,.92);border:1px solid var(--w12);border-radius:16px;padding:16px;margin-bottom:12px}
+.svc-icon{width:48px;height:48px;border-radius:12px;background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.3);display:flex;align-items:center;justify-content:center;font-size:1.35rem;flex-shrink:0}
+.svc-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.svc-name{font-weight:600;font-size:1.05rem}
+.svc-desc{color:var(--w70);font-size:.88rem;line-height:1.45;margin-bottom:14px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px;-webkit-overflow-scrolling:touch}
+.chip{flex-shrink:0;padding:8px 14px;border-radius:20px;border:1px solid var(--w12);background:var(--card);color:var(--w70);font-size:.8rem;cursor:pointer}
+.chip.on{border-color:var(--gold);background:rgba(212,175,55,.2);color:var(--gold)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.p-card{border-radius:14px;border:1px solid var(--w12);overflow:hidden;background:var(--card)}
+.p-thumb{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:700;color:rgba(255,255,255,.22)}
+.p-info{padding:10px 12px}
+.p-title{font-size:.88rem;font-weight:500}
+.p-cat{font-size:.75rem;color:var(--gold);margin-top:3px;opacity:.85}
+.contact-header{text-align:center;padding:8px 8px 4px;margin-bottom:8px}
+.contact-header h3{font-size:1.45rem;font-weight:700;letter-spacing:.02em}
+.contact-header .role{color:var(--gold);font-weight:600;margin-top:6px;font-size:1rem}
+.contact-header .loc{color:var(--w50);font-size:.88rem;margin-top:4px}
+.contact-card{
+  display:flex;align-items:center;gap:16px;
+  padding:18px 18px;
+  border-radius:18px;
+  margin-bottom:14px;
+  cursor:pointer;
+  text-decoration:none;color:inherit;
+  background:linear-gradient(145deg,rgba(28,28,28,.95),rgba(18,18,18,.98));
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 8px 24px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);
+  transition:transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.contact-card:active{transform:scale(.985)}
+.contact-card.wa{border-color:rgba(37,211,102,.22);box-shadow:0 8px 28px rgba(0,0,0,.35),0 0 0 1px rgba(37,211,102,.08),inset 0 1px 0 rgba(255,255,255,.04)}
+.contact-card.em{border-color:rgba(0,212,255,.2);box-shadow:0 8px 28px rgba(0,0,0,.35),0 0 0 1px rgba(0,212,255,.07),inset 0 1px 0 rgba(255,255,255,.04)}
+.contact-card.tt{border-color:rgba(212,175,55,.2);box-shadow:0 8px 28px rgba(0,0,0,.35),0 0 0 1px rgba(212,175,55,.08),inset 0 1px 0 rgba(255,255,255,.04)}
+.contact-card .ic{
+  width:52px;height:52px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+}
+.contact-card .ic.wa{background:linear-gradient(160deg,rgba(37,211,102,.2),rgba(37,211,102,.08));color:var(--wa)}
+.contact-card .ic.em{background:linear-gradient(160deg,rgba(0,212,255,.18),rgba(0,212,255,.06));color:var(--cyan)}
+.contact-card .ic.tt{background:linear-gradient(160deg,rgba(212,175,55,.2),rgba(212,175,55,.08));color:var(--gold)}
+.contact-card .meta{flex:1;min-width:0}
+.contact-card .meta .label{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--w50);margin-bottom:3px}
+.contact-card .meta .value{font-weight:560;font-size:.95rem;color:var(--w90);word-break:break-word}
+.contact-card .go{font-size:.78rem;opacity:.85;flex-shrink:0;font-weight:500}
+.contact-card.wa .go{color:var(--wa)}
+.contact-card.em .go{color:var(--cyan)}
+.contact-card.tt .go{color:var(--gold)}
+.contact-note{text-align:center;font-size:.78rem;color:var(--w30);margin-top:6px;line-height:1.45}
+.form-label{font-size:.8rem;color:var(--w50);margin-bottom:4px;margin-top:12px}
+.form-input,.form-select,.form-area{
+  width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--w12);
+  background:var(--card);color:var(--white);font-size:1rem;outline:none
+}
+.form-input:focus,.form-select:focus,.form-area:focus{border-color:rgba(212,175,55,.7)}
+.form-area{min-height:100px;resize:vertical}
+.nav{
+  position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;
+  background:rgba(18,18,18,.96);border-top:1px solid var(--w12);
+  display:flex;justify-content:space-around;padding:8px 4px calc(8px + var(--safe-b));z-index:50
+}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px;color:var(--w50);font-size:.65rem;background:none;border:none;cursor:pointer}
+.nav-item.on{color:var(--gold)}
+.nav-item span.ic{font-size:1.25rem}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal-bg.show{opacity:1;pointer-events:auto}
+.modal{background:var(--elev);border:1px solid var(--w12);border-radius:20px;padding:24px;width:100%;max-width:360px;transform:scale(.95);transition:transform .25s}
+.modal-bg.show .modal{transform:scale(1)}
+.modal h3{text-align:center;color:var(--gold);font-size:1.25rem;margin:4px 0 8px}
+.modal p{text-align:center;color:var(--w50);font-size:.85rem;margin-bottom:20px}
+.opt{display:block;width:100%;padding:16px;border-radius:14px;text-align:center;font-weight:600;margin-bottom:10px;border:1px solid;cursor:pointer;text-decoration:none}
+.opt-wa{background:rgba(18,140,126,.25);border-color:rgba(37,211,102,.5);color:var(--wa)}
+.opt-em{background:rgba(0,212,255,.12);border-color:rgba(0,212,255,.45);color:var(--cyan)}
+.close-x{position:absolute;top:12px;right:14px;background:none;border:none;color:var(--w50);font-size:1.4rem;cursor:pointer}
+.tip{font-size:.75rem;color:var(--w30);margin:8px 0 12px;line-height:1.4}
+.about-body{color:var(--w90);line-height:1.65;font-size:.95rem;white-space:pre-line}
+.price-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;border:1px solid var(--w12);background:rgba(26,26,26,.9);margin-bottom:10px}
+.price-row span:last-child{color:var(--gold);font-size:.9rem;white-space:nowrap}
+.success-box{text-align:center;padding:32px 20px}
+.success-box h2{color:var(--gold);margin-bottom:12px}
+.muted{color:var(--w50);font-size:.9rem;text-align:center;margin-top:8px}
+.center{text-align:center}
+.mt{margin-top:20px}
+.gold{color:var(--gold)}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div id="app">
+  <div class="screens">
+    <!-- HOME -->
+    <section id="home" class="screen active">
+      <h1 class="hero-title">HASSAN VISUALS</h1>
+      <p class="hero-sub">Creative Designs. Powerful Digital Presence.</p>
+      <p class="hero-desc">Helping businesses turn ideas into professional visuals, brands, websites and digital experiences.</p>
+      <div class="btn-row">
+        <button class="btn btn-fill" onclick="go('services')">VIEW SERVICES</button>
+        <button class="btn btn-outline" onclick="go('portfolio')">VIEW PORTFOLIO</button>
+        <button class="btn btn-fill" onclick="go('project')">START A PROJECT</button>
+        <a class="btn btn-outline" id="homeWa" href="#">CHAT ON WHATSAPP</a>
+      </div>
+      <p class="muted mt" style="letter-spacing:.08em;font-size:.75rem">PREMIUM CREATIVE SOLUTIONS</p>
+      <p class="muted" style="font-size:.8rem">From logos to full digital products — crafted with precision.</p>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="screen">
+      <h2 class="section-title">Services</h2>
+      <p class="section-sub">Professional creative & digital solutions</p>
+      <div class="accent-line"></div>
+      <div id="svcList"></div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="screen">
+      <h2 class="section-title">Portfolio</h2>
+      <p class="section-sub">Selected work — replace placeholders later</p>
+      <div class="accent-line"></div>
+      <div class="chips" id="chips"></div>
+      <p class="tip">Tap a category to filter. You can later replace these placeholders with your real designs.</p>
+      <div class="grid" id="pGrid"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="screen">
+      <h2 class="section-title">About</h2>
+      <p class="section-sub">Who we are</p>
+      <div class="accent-line"></div>
+      <div class="card about-body" id="aboutText"></div>
+      <h3 style="margin:24px 0 12px;font-size:1.15rem">Who We Help</h3>
+      <div id="clients"></div>
+      <p class="gold mt" style="font-weight:600">Based in Nigeria</p>
+      <p class="muted">Led by Hassan</p>
+      <button class="btn btn-outline mt" style="width:100%" onclick="go('pricing')">VIEW PRICING</button>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="screen">
+      <h2 class="section-title">Pricing</h2>
+      <p class="section-sub">Contact for current rates</p>
+      <div class="accent-line"></div>
+      <p class="tip">No fixed prices shown yet. Message us for a quote tailored to your project.</p>
+      <div id="priceList"></div>
+      <button class="btn btn-fill mt" style="width:100%" onclick="go('project')">REQUEST A QUOTE</button>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="screen">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-sub">Let's work together</p>
+      <div class="accent-line"></div>
+      <div class="contact-header">
+        <h3>Hassan Visuals</h3>
+        <p class="role">Hassan</p>
+        <p class="loc">Nigeria</p>
+      </div>
+      <div style="margin-top:22px" id="contactCards"></div>
+      <p class="contact-note">Tap a card to open WhatsApp, Email or TikTok</p>
+    </section>
+
+    <!-- PROJECT -->
+    <section id="project" class="screen">
+      <h2 class="section-title">Start a Project</h2>
+      <p class="section-sub">Tell us about your idea</p>
+      <div class="accent-line"></div>
+      <div id="formWrap">
+        <label class="form-label">Name *</label>
+        <input class="form-input" id="fName" placeholder="Your name"/>
+        <label class="form-label">Business / Company Name</label>
+        <input class="form-input" id="fBiz" placeholder="Optional"/>
+        <label class="form-label">WhatsApp Number *</label>
+        <input class="form-input" id="fWa" type="tel" placeholder="e.g. 0705..."/>
+        <label class="form-label">Email *</label>
+        <input class="form-input" id="fEmail" type="email" placeholder="you@email.com"/>
+        <label class="form-label">Service Required *</label>
+        <select class="form-select" id="fSvc"></select>
+        <label class="form-label">Project Description *</label>
+        <textarea class="form-area" id="fDesc" placeholder="Describe your project..."></textarea>
+        <label class="form-label">Deadline</label>
+        <input class="form-input" id="fDead" placeholder="e.g. 2 weeks"/>
+        <label class="form-label">Budget</label>
+        <input class="form-input" id="fBud" placeholder="Optional"/>
+        <p class="tip">After you tap send, your email app will open with the details ready to send.</p>
+        <button class="btn btn-fill" style="width:100%;margin-top:8px" onclick="submitProject()">SEND PROJECT REQUEST</button>
+      </div>
+      <div id="formSuccess" class="success-box" style="display:none">
+        <h2>Request Ready</h2>
+        <p style="color:var(--w70);line-height:1.5">Your project enquiry was prepared. Finish sending it from your email app. We will get back to you shortly.</p>
+        <button class="btn btn-fill mt" style="width:100%" onclick="go('home');resetForm()">BACK TO HOME</button>
+      </div>
+    </section>
+  </div>
+
+  <nav class="nav">
+    <button class="nav-item on" data-s="home" onclick="go('home')"><span class="ic">⌂</span>Home</button>
+    <button class="nav-item" data-s="services" onclick="go('services')"><span class="ic">▦</span>Services</button>
+    <button class="nav-item" data-s="portfolio" onclick="go('portfolio')"><span class="ic">▣</span>Portfolio</button>
+    <button class="nav-item" data-s="about" onclick="go('about')"><span class="ic">ℹ</span>About</button>
+    <button class="nav-item" data-s="contact" onclick="go('contact')"><span class="ic">✉</span>Contact</button>
+  </nav>
+</div>
+
+<!-- Service request modal -->
+<div class="modal-bg" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal" style="position:relative">
+    <button class="close-x" onclick="closeModal()">×</button>
+    <p style="color:var(--w70);font-size:.9rem;text-align:center">Interested in</p>
+    <h3 id="modalSvc">Service</h3>
+    <p>Choose how you'd like to get in touch</p>
+    <a class="opt opt-wa" id="modalWa" href="#">💬  CONTACT VIA WHATSAPP</a>
+    <a class="opt opt-em" id="modalEm" href="#">📧  CONTACT VIA EMAIL</a>
+  </div>
+</div>
+
+<script>
+const WA = '2347053326235';
+const WA_DISPLAY = '07053326235';
+const EMAIL = 'hassanmotionsedit@gmail.com';
+const TIKTOK = 'https://www.tiktok.com/@hinnmyer';
+
+const SERVICES = [
+  {name:'Graphic Design', desc:'Professional graphics that communicate your brand message with clarity and impact.', icon:'🎨'},
+  {name:'Logo Design', desc:'Memorable, versatile logos that become the face of your brand.', icon:'✦'},
+  {name:'Brand Identity', desc:'Complete visual systems — colors, typography, guidelines — for consistent branding.', icon:'◈'},
+  {name:'Flyer Design', desc:'Eye-catching flyers designed to promote events, offers and campaigns effectively.', icon:'📄'},
+  {name:'Social Media Designs', desc:'Scroll-stopping posts, stories and covers tailored for every platform.', icon:'📱'},
+  {name:'Business Card Design', desc:'Elegant digital business cards that leave a lasting professional impression.', icon:'💳'},
+  {name:'Banner & Roll-up Designs', desc:'High-impact banners and roll-ups for events, stores and exhibitions.', icon:'🖼'},
+  {name:'Invitation Designs', desc:'Beautiful custom invitations for weddings, corporate events and celebrations.', icon:'✉'},
+  {name:'Company Profile Design', desc:'Polished company profiles that present your business with authority.', icon:'🏢'},
+  {name:'Website Design', desc:'Modern, conversion-focused website designs that look premium on every device.', icon:'🌐'},
+  {name:'Website Development', desc:'Fast, responsive websites built to perform and scale with your business.', icon:'</>'},
+  {name:'Mobile App Design & Development', desc:'Beautiful app interfaces and functional mobile experiences from concept to launch.', icon:'📲'},
+  {name:'Digital Advertising Designs', desc:'Ad creatives optimized for Facebook, Instagram, Google and more.', icon:'📣'},
+  {name:'Custom Creative Projects', desc:'Bespoke creative solutions tailored exactly to your unique vision.', icon:'★'}
+];
+
+const PORTFOLIO = [
+  {t:'Brand Identity System',c:'Branding',col:'#1A3A5C'},
+  {t:'Modern Logo Set',c:'Logos',col:'#6B2D5C'},
+  {t:'Event Flyer Series',c:'Flyers',col:'#0D4F4F'},
+  {t:'Social Media Kit',c:'Social Media',col:'#3A1A5C'},
+  {t:'Corporate Website',c:'Websites',col:'#1A4A3A'},
+  {t:'Mobile App UI',c:'Apps',col:'#4A2A1A'},
+  {t:'Company Profile',c:'Corporate Designs',col:'#2A3A4A'},
+  {t:'Product Graphics',c:'Graphic Design',col:'#4A1A3A'},
+  {t:'Logo Concepts',c:'Logos',col:'#1A5C4A'},
+  {t:'Campaign Creatives',c:'Social Media',col:'#5C3A1A'},
+  {t:'Landing Page Design',c:'Websites',col:'#2A1A5C'},
+  {t:'Business Stationery',c:'Corporate Designs',col:'#3A4A1A'}
+];
+const CATS = ['All','Graphic Design','Logos','Branding','Flyers','Social Media','Websites','Apps','Corporate Designs'];
+const PRICES = ['Logo Design','Brand Identity','Flyer Design','Social Media Designs','Website Design','Website Development','Mobile App Design','Custom Projects'];
+
+function waLink(msg){
+  return 'https://wa.me/'+WA+'?text='+encodeURIComponent(msg||"Hi Hassan Visuals, I'd like to discuss a project with you.");
+}
+function emailLink(subj, body){
+  return 'mailto:'+EMAIL+'?subject='+encodeURIComponent(subj||'Project Enquiry – Hassan Visuals')+'&body='+encodeURIComponent(body||'');
+}
+
+document.getElementById('homeWa').href = waLink();
+
+// Services
+const svcList = document.getElementById('svcList');
+SERVICES.forEach(s=>{
+  const d=document.createElement('div');
+  d.className='card';
+  d.innerHTML=`<div class="svc-head"><div class="svc-icon">${s.icon}</div><div class="svc-name">${s.name}</div></div>
+    <p class="svc-desc">${s.desc}</p>
+    <button class="btn btn-fill" style="width:100%" data-svc="${s.name}">Request This Service</button>`;
+  d.querySelector('button').onclick=()=>openModal(s.name);
+  svcList.appendChild(d);
+});
+
+// Portfolio
+let cat='All';
+const chips=document.getElementById('chips');
+CATS.forEach(c=>{
+  const b=document.createElement('button');
+  b.className='chip'+(c==='All'?' on':'');
+  b.textContent=c;
+  b.onclick=()=>{cat=c;document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderP();};
+  chips.appendChild(b);
+});
+function renderP(){
+  const g=document.getElementById('pGrid');
+  g.innerHTML='';
+  PORTFOLIO.filter(p=>cat==='All'||p.c===cat).forEach(p=>{
+    const el=document.createElement('div');
+    el.className='p-card';
+    el.innerHTML=`<div class="p-thumb" style="background:linear-gradient(180deg,${p.col}b3,${p.col}59,#0A0A0Ae6)">${p.c.slice(0,2).toUpperCase()}</div>
+      <div class="p-info"><div class="p-title">${p.t}</div><div class="p-cat">${p.c}</div></div>`;
+    g.appendChild(el);
+  });
+}
+renderP();
+
+// About
+document.getElementById('aboutText').textContent =
+`Hassan Visuals is a professional creative and digital solutions brand dedicated to helping businesses, organizations and individuals build a stronger visual and digital presence.
+
+We specialize in turning ideas into polished graphics, memorable brands, high-performing websites and complete digital experiences.
+
+Whether you are a startup needing a logo and identity, a growing business ready for a new website, or an established company seeking consistent marketing creatives — we deliver premium work that elevates your image and communicates your value clearly.
+
+Our focus is quality, clarity and results. Every project is handled with attention to detail and a commitment to making your brand look and feel professional.`;
+const clients=['Startups building their first brand identity','Growing businesses needing consistent marketing visuals','Companies launching or redesigning websites & apps','Organizations requiring professional corporate materials','Individuals with custom creative projects'];
+document.getElementById('clients').innerHTML=clients.map(c=>`<div style="display:flex;gap:10px;margin:8px 0;color:var(--w70);font-size:.9rem"><span style="color:var(--gold)">▸</span><span>${c}</span></div>`).join('');
+
+// Pricing
+document.getElementById('priceList').innerHTML=PRICES.map(n=>`<div class="price-row"><span>${n}</span><span>Contact for quote</span></div>`).join('');
+
+// Contact cards
+document.getElementById('contactCards').innerHTML=`
+  <a class="contact-card wa" href="${waLink()}">
+    <div class="ic wa">💬</div>
+    <div class="meta"><div class="label">WhatsApp</div><div class="value">${WA_DISPLAY}</div></div>
+    <span class="go">Open →</span>
+  </a>
+  <a class="contact-card em" href="${emailLink()}">
+    <div class="ic em">📧</div>
+    <div class="meta"><div class="label">Email</div><div class="value">${EMAIL}</div></div>
+    <span class="go">Open →</span>
+  </a>
+  <a class="contact-card tt" href="${TIKTOK}" target="_blank" rel="noopener">
+    <div class="ic tt">♪</div>
+    <div class="meta"><div class="label">TikTok</div><div class="value">@hinnmyer</div></div>
+    <span class="go">Open →</span>
+  </a>`;
+
+// Project form services
+const fSvc=document.getElementById('fSvc');
+SERVICES.forEach(s=>{const o=document.createElement('option');o.value=s.name;o.textContent=s.name;fSvc.appendChild(o);});
+
+function submitProject(){
+  const name=document.getElementById('fName').value.trim();
+  const biz=document.getElementById('fBiz').value.trim();
+  const wa=document.getElementById('fWa').value.trim();
+  const em=document.getElementById('fEmail').value.trim();
+  const svc=fSvc.value;
+  const desc=document.getElementById('fDesc').value.trim();
+  const dead=document.getElementById('fDead').value.trim();
+  const bud=document.getElementById('fBud').value.trim();
+  if(!name||!wa||!em||!desc){alert('Please fill in Name, WhatsApp, Email and Description.');return;}
+  const body=`New Project Request from Hassan Visuals App
+
+Name: ${name}
+Business/Company: ${biz}
+WhatsApp: ${wa}
+Email: ${em}
+Service Required: ${svc}
+Project Description: ${desc}
+Deadline: ${dead}
+Budget: ${bud}
+
+---
+Sent via Hassan Visuals`;
+  window.location.href=emailLink('New Project Request – '+svc, body);
+  document.getElementById('formWrap').style.display='none';
+  document.getElementById('formSuccess').style.display='block';
+}
+function resetForm(){
+  document.getElementById('formWrap').style.display='block';
+  document.getElementById('formSuccess').style.display='none';
+  ['fName','fBiz','fWa','fEmail','fDesc','fDead','fBud'].forEach(id=>document.getElementById(id).value='');
+}
+
+function openModal(name){
+  document.getElementById('modalSvc').textContent=name;
+  const msg=`Hi Hassan Visuals, I'm interested in your ${name} service. I'd like to discuss my project with you.`;
+  document.getElementById('modalWa').href=waLink(msg);
+  const body=`Hi Hassan Visuals,
+
+I'm interested in your ${name} service and I'd like to discuss my project with you.
+
+Business/Name:
+Project details:
+Preferred deadline:
+
+Thank you.`;
+  document.getElementById('modalEm').href=emailLink('Project Enquiry – '+name, body);
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal(){document.getElementById('modal').classList.remove('show');}
+
+function go(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>{
+    n.classList.toggle('on', n.dataset.s===id || (id==='pricing'&&n.dataset.s==='about') || (id==='project'&&n.dataset.s==='home'));
+  });
+  document.getElementById(id).scrollTop=0;
+}
+
+// Animated background
+(function(){
+  const c=document.getElementById('bg'),x=c.getContext('2d');
+  let w,h,t=0;
+  function resize(){w=c.width=window.innerWidth;h=c.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  const particles=[];
+  for(let i=0;i<18;i++)particles.push({x:Math.random(),y:Math.random(),r:1+Math.random()*1.5,gold:i%3===0});
+  function orb(cx,cy,r,col){
+    const g=x.createRadialGradient(cx,cy,0,cx,cy,r);
+    g.addColorStop(0,col);g.addColorStop(1,'transparent');
+    x.fillStyle=g;x.beginPath();x.arc(cx,cy,r,0,Math.PI*2);x.fill();
+  }
+  function frame(){
+    t+=0.004;x.fillStyle='#0A0A0A';x.fillRect(0,0,w,h);
+    const pulse=0.4+0.3*Math.sin(t*1.2);
+    orb(w*(0.2+0.15*Math.cos(t)),h*(0.25+0.1*Math.sin(t)),w*0.45,`rgba(26,58,92,${0.18*pulse})`);
+    orb(w*(0.75+0.12*Math.sin(t*1.2)),h*(0.6+0.15*Math.cos(t*1.2)),w*0.5,`rgba(107,45,92,${0.15*pulse})`);
+    orb(w*(0.5+0.2*Math.cos(t*0.8)),h*(0.85+0.08*Math.sin(t*0.8)),w*0.4,`rgba(13,79,79,${0.12*pulse})`);
+    orb(w*0.5,h*0.08,w*0.35,`rgba(212,175,55,${0.06*pulse})`);
+    x.strokeStyle=`rgba(0,212,255,${0.04*pulse})`;x.lineWidth=1.5;
+    x.beginPath();x.moveTo(0,h*0.3+20*Math.sin(t));x.lineTo(w,h*0.35+15*Math.cos(t*1.2));x.stroke();
+    particles.forEach((p,i)=>{
+      const py=p.y*h+8*Math.sin(t*2+i);
+      x.fillStyle=p.gold?`rgba(212,175,55,${0.2+0.1*Math.sin(t+i)})`:`rgba(255,255,255,${0.12+0.08*Math.sin(t+i)})`;
+      x.beginPath();x.arc(p.x*w,py,p.r,0,Math.PI*2);x.fill();
+    });
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+// Service worker for offline / install feel (optional)
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+</script>
+</body>
+</html>
